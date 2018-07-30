@@ -145,7 +145,6 @@ def similarity_check(embeddings, cv_data):
         '''Cosine similarity'''
         normalize = tf.sqrt(tf.reduce_sum(tf.square(embeddings), 1, keepdims=True))
         norm_embed = embeddings / normalize
-#        norm_embed = tf.transpose(norm_embed)
 
         cv_embed = tf.nn.embedding_lookup(norm_embed, cv_data)
         similarity = tf.matmul(cv_embed, norm_embed, transpose_b=True)
@@ -218,13 +217,3 @@ if __name__ == "__main__":
 
     num_steps = 50000
     text, dictionary, norm_embed = train(graph, num_steps, 'reviews_corpus.txt')
-    """
-    vocab_size = 50000
-    embedding_size = 300
-    batch_size = 128
-    epochs = 50
-    layers = 2
-    time_steps = 30
-
-    rnn_train(graph, vocab_size, embedding_size, batch_size, epochs, layers, time_steps, text, dictionary, embeddings)
-    """
